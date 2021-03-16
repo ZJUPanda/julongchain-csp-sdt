@@ -1,16 +1,15 @@
 CC = gcc
 OPT = -O2
-TGT = libsdtsm.so
-OBJ = SM3.o SM2.o SM4.o SdtSM.o
+TGT = test
+OBJ = SM3.o SM2.o test.o
 
 all: $(TGT) $(APP)
 
 $(OBJ): %o:%c
-	$(CC) -c $(CFLAGS) -fPIC $? -o $@
+	$(CC) -c $? -o $@
 
 $(TGT):$(OBJ) 
-	$(CC) $(CFLAGS) -shared -fPIC -o $(TGT) $(OBJ) $(OPT)
-	cp libsdtsm.so ../lib
+	$(CC) -o $(TGT) $(OBJ) $(OPT)
 	
 clean:
 	rm -rf *.o *.bak $(TGT) $(APP)
